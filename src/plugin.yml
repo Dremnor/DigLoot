@@ -1,0 +1,9 @@
+name: DigLoot
+version: 1.0
+main: me.Dremnor.DigLoot.Main
+description: Random loot form diging
+author: Dremnor
+commands:
+    dl:
+        description: Main DigLoot Command
+        usage: /dl
