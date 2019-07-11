@@ -31,13 +31,13 @@ public class YmlDataControl {
     public void createPlayer(UUID uuid){
         
         //Create Players folder
-        File file = new File(PLUGIN.getDataFolder(),"C:\\Players");
+        File file = new File(PLUGIN.getDataFolder(),"Players");
         if (!file.exists()) {
             file.mkdir();
         }
         
         //Check if player data file exists and create if not
-        File ymlitemsFile = new File(PLUGIN.getDataFolder()+"\\Players",uuid.toString()+".yml");
+        File ymlitemsFile = new File(PLUGIN.getDataFolder()+File.separator+"Players",uuid.toString()+".yml");
         if(!ymlitemsFile.exists()){
             try {
                 ymlitemsFile.createNewFile();
@@ -61,7 +61,7 @@ public class YmlDataControl {
             
             
             
-            File ymlitemsFile = new File(PLUGIN.getDataFolder()+"\\Players\\",uuid.toString()+".yml");
+            File ymlitemsFile = new File(PLUGIN.getDataFolder()+File.separator+"Players"+File.separator,uuid.toString()+".yml");
             if(!ymlitemsFile.exists()){
                 try {
                     ymlitemsFile.createNewFile();
@@ -82,7 +82,7 @@ public class YmlDataControl {
             
             
             
-            File ymlitemsFile = new File(PLUGIN.getDataFolder()+"\\Players\\",uuid.toString()+".yml");
+            File ymlitemsFile = new File(PLUGIN.getDataFolder()+File.separator+"Players"+File.separator,uuid.toString()+".yml");
             if(!ymlitemsFile.exists()){
                 try {
                     ymlitemsFile.createNewFile();
@@ -98,7 +98,7 @@ public class YmlDataControl {
     }
     
     public static boolean addItem(UUID uuid, Map<String, Object> item){
-        File ymlitemsFile = new File(PLUGIN.getDataFolder()+"\\Players\\",uuid.toString()+".yml");
+        File ymlitemsFile = new File(PLUGIN.getDataFolder()+File.separator+"Players"+File.separator,uuid.toString()+".yml");
         if(ymlitemsFile.exists()){
             FileConfiguration pdata = YamlConfiguration.loadConfiguration(ymlitemsFile);
             List<Map<?, ?>> itemlist = pdata.getMapList("inventory.items");
@@ -123,7 +123,7 @@ public class YmlDataControl {
     }
     
     private static void repairPlayer(UUID uuid){
-        File ymlitemsFile = new File(PLUGIN.getDataFolder()+"\\Players\\",uuid.toString()+".yml");
+        File ymlitemsFile = new File(PLUGIN.getDataFolder()+File.separator+"Players"+File.separator,uuid.toString()+".yml");
         if(!ymlitemsFile.exists()){
             try {
                 ymlitemsFile.createNewFile();

@@ -74,7 +74,7 @@ public class LootInventory implements Listener{
     
     public static void displayLoot(Player p){
         if(!PLUGIN.mysql){
-            File itemsFile = new File(PLUGIN.getDataFolder()+"\\Players\\",p.getUniqueId().toString()+".yml");
+            File itemsFile = new File(PLUGIN.getDataFolder()+File.separator+"Players"+File.separator,p.getUniqueId().toString()+".yml");
             if(itemsFile.exists()){
                 FileConfiguration items = YamlConfiguration.loadConfiguration(itemsFile);
                 List<Map<?, ?>> itemlist = items.getMapList("inventory.items");
@@ -89,7 +89,7 @@ public class LootInventory implements Listener{
     
     private static void getItem(Player p, int slot) {
         if(!PLUGIN.mysql){
-            File itemsFile = new File(PLUGIN.getDataFolder()+"\\Players\\",p.getUniqueId().toString()+".yml");
+            File itemsFile = new File(PLUGIN.getDataFolder()+File.separator+"Players"+File.separator,p.getUniqueId().toString()+".yml");
             if(itemsFile.exists()){
                 FileConfiguration items = YamlConfiguration.loadConfiguration(itemsFile);
                 List<Map<?, ?>> itemlist = items.getMapList("inventory.items");
