@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package me.Dremnor.DigLoot;
 
 
@@ -32,7 +32,7 @@ public class Main extends JavaPlugin implements Listener {
     public void onEnable(){
         
         //load config
-        saveResource("config.yml", false);     
+        saveResource("config.yml", false);
         
         //Check data storage option
         this.mysql = this.getConfig().getBoolean("ues_mysql");
@@ -48,7 +48,7 @@ public class Main extends JavaPlugin implements Listener {
         }
         
         //Events
-        getServer().getPluginManager().registerEvents(new NewPlayer(), this);    
+        getServer().getPluginManager().registerEvents(new NewPlayer(), this);
         getServer().getPluginManager().registerEvents(new BreakBlock(), this);
         
         //Commands
@@ -64,7 +64,7 @@ public class Main extends JavaPlugin implements Listener {
         getServer().getConsoleSender().sendMessage(ChatColor.DARK_PURPLE+"DigLoot Disabled");
     }
     
-
-     
+    
+    
     
 }

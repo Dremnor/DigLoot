@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package Events;
 
 import YmlData.YmlDataControl;
@@ -28,16 +28,16 @@ public class NewPlayer implements Listener {
         Player p = event.getPlayer();
         UUID uuid = p.getUniqueId();
         if(!p.hasPlayedBefore())
-        if(plugin.mysql){
-            if(plugin.debug)System.out.println("Player: "+p.getName()+" Logged in! "+uuid.toString());
-            if(!plugin.db.playerExist(uuid)){
-                plugin.db.playerCreate(p.getUniqueId(), p.getName());
+            if(plugin.mysql){
+                if(plugin.debug)System.out.println("Player: "+p.getName()+" Logged in! "+uuid.toString());
+                if(!plugin.db.playerExist(uuid)){
+                    plugin.db.playerCreate(p.getUniqueId(), p.getName());
+                }
+            }else{
+                YmlDataControl ym = new YmlDataControl();
+                ym.createPlayer(uuid);
             }
-        }else{
-            YmlDataControl ym = new YmlDataControl();
-            ym.createPlayer(uuid);
-        }
-
+        
         
     }
     

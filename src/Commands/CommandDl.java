@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package Commands;
 
 import YmlData.YmlDataControl;
@@ -32,7 +32,7 @@ public class CommandDl implements CommandExecutor {
     public CommandDl() {
         //plugin.getCommand("dl").setExecutor(new CommandDl());
     }
-
+    
     @Override
     public boolean onCommand(CommandSender cs, Command cmnd, String string, String[] strings) {
         
@@ -54,7 +54,7 @@ public class CommandDl implements CommandExecutor {
                             }
                         }
                         FileConfiguration items = YamlConfiguration.loadConfiguration(itemsFile);
-
+                        
                         List<Map<?, ?>> itemlist = items.getMapList("loot.items");
                         if(!itemlist.contains(p.getInventory().getItemInMainHand().serialize())){
                             itemlist.add(p.getInventory().getItemInMainHand().serialize());
@@ -68,10 +68,10 @@ public class CommandDl implements CommandExecutor {
                         }else{
                             p.sendMessage(ChatColor.DARK_RED+"Item already in loot table :o");
                         }
-
+                        
                     }else{
                         p.sendMessage(ChatColor.DARK_RED+"You need to hold item in hand :(");
-                    }                    
+                    }
                 }
                 
                 if(strings[0].equals("remove")){
@@ -95,10 +95,10 @@ public class CommandDl implements CommandExecutor {
                                 }
                             }else{
                                 p.sendMessage(ChatColor.DARK_RED+"Wrong command parameters(/dl remove <item number from /dl list>) :(");
-                            }                                                       
+                            }
                         }else{
                             p.sendMessage(ChatColor.DARK_RED+"Wrong command parameters(/dl remove <item number from /dl list>) :(");
-                        }                                                
+                        }
                     }else{
                         p.sendMessage(ChatColor.DARK_RED+"You need to add some items first :(");
                     }
@@ -109,9 +109,9 @@ public class CommandDl implements CommandExecutor {
                     if(itemsFile.exists()){
                         FileConfiguration items = YamlConfiguration.loadConfiguration(itemsFile);
                         List<Map<?, ?>> itemlist = items.getMapList("loot.items");
-                        if(itemlist.size()>0){                            
+                        if(itemlist.size()>0){
                             for(int i =0;i<itemlist.size();i++){
-                               p.sendMessage(ChatColor.AQUA+" "+(i+1)+" - "+ItemStack.deserialize((Map<String, Object>) itemlist.get(i)).getType().toString()+" "+ItemStack.deserialize((Map<String, Object>) itemlist.get(i)).getAmount());
+                                p.sendMessage(ChatColor.AQUA+" "+(i+1)+" - "+ItemStack.deserialize((Map<String, Object>) itemlist.get(i)).getType().toString()+" "+ItemStack.deserialize((Map<String, Object>) itemlist.get(i)).getAmount());
                             }
                         }
                     }
@@ -135,7 +135,7 @@ public class CommandDl implements CommandExecutor {
                 if(strings[0].equals("repair")){
                     YmlDataControl.repairOnlinePlayers();
                 }
-            }                                           
+            }
         }else{
             cs.sendMessage("Wrong use! Player only cmd");
         }
@@ -144,13 +144,13 @@ public class CommandDl implements CommandExecutor {
         return true;
     }
     
-    boolean tryParseInt(String value) {  
-     try {  
-         Integer.parseInt(value);  
-         return true;  
-      } catch (NumberFormatException e) {  
-         return false;  
-      }  
-}
-
+    boolean tryParseInt(String value) {
+        try {
+            Integer.parseInt(value);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+    
 }

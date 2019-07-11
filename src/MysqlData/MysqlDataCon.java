@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package MysqlData;
 
 
@@ -22,11 +22,11 @@ import org.bukkit.Bukkit;
  */
 public class MysqlDataCon {
     private Connection connection;
-
+    
     public Connection getConnection() {
         return connection;
     }
-
+    
     public void setConnection(Connection connection) {
         this.connection = connection;
     }
@@ -34,8 +34,8 @@ public class MysqlDataCon {
     Main plugin = Main.getPlugin(Main.class);
     
     public MysqlDataCon(){
-
-
+        
+        
         
         this.host=plugin.getConfig().getString("mysql.host");
         this.database=plugin.getConfig().getString("mysql.database");
@@ -44,11 +44,11 @@ public class MysqlDataCon {
         this.table=plugin.getConfig().getString("mysql.table");
         
         try{
-
+            
             synchronized(this){
                 if(getConnection() !=null && getConnection().isClosed()){
-                return;
-            }
+                    return;
+                }
                 Class.forName("com.mysql.jdbc.Driver");
                 setConnection(DriverManager.getConnection("jdbc:mysql://"+this.host+":3306/"+this.database+"?autoReconnect=true&useSSL=false",this.username,this.password));
                 if(plugin.debug)Bukkit.getConsoleSender().sendMessage("DB Connected");
@@ -72,23 +72,23 @@ public class MysqlDataCon {
         }else{
             if(plugin.debug)System.out.println("Tabela nie istnieje!");
             statment = this.connection.prepareStatement("CREATE TABLE `"+this.table+"` (" +
-                                                        "  `id` int(11) NOT NULL," +
-                                                        "  `uuid` text COLLATE utf8_polish_ci NOT NULL," +
-                                                        "  `name` text COLLATE utf8_polish_ci NOT NULL," +
-                                                        "  `storage` longtext COLLATE utf8_polish_ci," +
-                                                        "  `count` bigint(20) NOT NULL" +
-                                                        ") ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;");
+                    "  `id` int(11) NOT NULL," +
+                    "  `uuid` text COLLATE utf8_polish_ci NOT NULL," +
+                    "  `name` text COLLATE utf8_polish_ci NOT NULL," +
+                    "  `storage` longtext COLLATE utf8_polish_ci," +
+                    "  `count` bigint(20) NOT NULL" +
+                    ") ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;");
             statment.executeUpdate();
             
             statment = this.connection.prepareStatement("ALTER TABLE `"+this.table+"`" +
-            "  ADD PRIMARY KEY (`id`)");
+                    "  ADD PRIMARY KEY (`id`)");
             statment.executeUpdate();
             
             statment = this.connection.prepareStatement("ALTER TABLE `"+this.table+"`" +
-            "  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2");
+                    "  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2");
             statment.executeUpdate();
             
-        }  
+        }
     }
     
     public boolean playerExist(UUID uuid) throws SQLException{
@@ -102,7 +102,7 @@ public class MysqlDataCon {
         }else{
             System.out.println("Gracz nie istnieje!");
             return false;
-        }        
+        }
     }
     
     public void playerCreate(final UUID uuid,String player) throws SQLException{

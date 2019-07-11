@@ -1,10 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package Events;
 
+import YmlData.YmlDataControl;
 import java.io.File;
 import java.util.List;
 import java.util.Map;
@@ -29,20 +30,29 @@ public class BreakBlock implements Listener {
     public void onBreak(BlockBreakEvent event){
         
         Random rn = new Random();
-        int los = rn.nextInt(plugin.chance);        
+        int los = rn.nextInt(plugin.chance);
         if(plugin.debug)event.getPlayer().sendMessage("Zniszczyles Blok los: "+Integer.toString(los));
-
+        
         if(los>=1 && los<=50){
-            File itemsFile = new File(plugin.getDataFolder(),"loot.yml");
-            if(itemsFile.exists()){
-                FileConfiguration items = YamlConfiguration.loadConfiguration(itemsFile);
-                List<Map<?, ?>> itemlist = items.getMapList("loot.items");
-                if(itemlist.size()>0){
-                    los = rn.nextInt(itemlist.size());
-                    event.getPlayer().getInventory().addItem(ItemStack.deserialize((Map<String, Object>) itemlist.get(los)));
-                    event.getPlayer().sendMessage(ChatColor.GOLD+"WoW! You got free loot! Check your inventory.");
+            if(!plugin.mysql){
+                File itemsFile = new File(plugin.getDataFolder(),"loot.yml");
+                if(itemsFile.exists()){
+                    FileConfiguration items = YamlConfiguration.loadConfiguration(itemsFile);
+                    List<Map<?, ?>> itemlist = items.getMapList("loot.items");
+                    if(itemlist.size()>0){
+                        los = rn.nextInt(itemlist.size());
+                        //event.getPlayer().getInventory().addItem(ItemStack.deserialize((Map<String, Object>) itemlist.get(los)));
+                        if(YmlDataControl.addItem(event.getPlayer().getUniqueId(), (Map<String, Object>) itemlist.get(los))){
+                            event.getPlayer().sendMessage(ChatColor.GOLD+"WoW! You got free loot! Check your loot inventory(/dl).");
+                        }else{
+                            event.getPlayer().sendMessage(ChatColor.RED+"Your loot inventory is Full! ;o.");
+                        }
+                        
+                        
+                    }
                 }
             }
+            
             
         }
         
