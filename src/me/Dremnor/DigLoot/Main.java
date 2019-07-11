@@ -31,8 +31,10 @@ public class Main extends JavaPlugin implements Listener {
     @Override
     public void onEnable(){
         
+        //load config
+        saveResource("config.yml", false);     
+        
         //Check data storage option
-        this.getConfig().options().copyDefaults();
         this.mysql = this.getConfig().getBoolean("ues_mysql");
         
         //Database Connection

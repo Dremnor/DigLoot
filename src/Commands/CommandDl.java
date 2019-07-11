@@ -5,6 +5,7 @@
  */
 package Commands;
 
+import YmlData.YmlDataControl;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -129,6 +130,10 @@ public class CommandDl implements CommandExecutor {
                     if(tryParseInt(strings[1])){
                         plugin.chance = Integer.parseInt(strings[1]);
                     }
+                }
+                
+                if(strings[0].equals("repair")){
+                    YmlDataControl.repairOnlinePlayers();
                 }
             }                                           
         }else{

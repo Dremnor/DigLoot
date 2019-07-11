@@ -1,9 +1,4 @@
-
-# Change to true if you want to store data in mysql database
-# If false plugin will store data in yml files
 ues_mysql: false
-
-# mysql connection data
 mysql:
     database: Database_name
     username: Username

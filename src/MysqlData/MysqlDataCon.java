@@ -35,8 +35,7 @@ public class MysqlDataCon {
     
     public MysqlDataCon(){
 
-        plugin.getConfig().options().copyDefaults();
-        plugin.saveConfig();
+
         
         this.host=plugin.getConfig().getString("mysql.host");
         this.database=plugin.getConfig().getString("mysql.database");
