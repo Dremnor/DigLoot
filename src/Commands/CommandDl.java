@@ -5,6 +5,7 @@
 */
 package Commands;
 
+import InventoryMenu.LootInventory;
 import YmlData.YmlDataControl;
 import java.io.File;
 import java.io.IOException;
@@ -135,6 +136,9 @@ public class CommandDl implements CommandExecutor {
                 if(strings[0].equals("repair")){
                     YmlDataControl.repairOnlinePlayers();
                 }
+            }else{
+                
+                LootInventory.displayLoot(p);
             }
         }else{
             cs.sendMessage("Wrong use! Player only cmd");

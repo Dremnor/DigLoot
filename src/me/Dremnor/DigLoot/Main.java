@@ -9,6 +9,7 @@ package me.Dremnor.DigLoot;
 import Commands.CommandDl;
 import Events.BreakBlock;
 import Events.NewPlayer;
+import InventoryMenu.LootInventory;
 import MysqlData.MysqlDataCon;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -50,6 +51,7 @@ public class Main extends JavaPlugin implements Listener {
         //Events
         getServer().getPluginManager().registerEvents(new NewPlayer(), this);
         getServer().getPluginManager().registerEvents(new BreakBlock(), this);
+        getServer().getPluginManager().registerEvents(new LootInventory(), this);
         
         //Commands
         this.getCommand("dl").setExecutor(new CommandDl());
