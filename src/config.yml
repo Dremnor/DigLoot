@@ -1,3 +1,9 @@
+#
+# Dont use config file
+# Work in progress 
+# ues_mysql HAVE TO be false
+# WORK IN PROGRESSS :)
+#
 ues_mysql: false
 mysql:
     database: Database_name
