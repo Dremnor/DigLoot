@@ -8,6 +8,8 @@ package Commands;
 import InventoryMenu.ItemfilterRemove;
 import InventoryMenu.LootInventory;
 import LootControll.ItemFilter;
+import Tools.FilterAddTool;
+import Tools.FilterRemoveTool;
 import YmlData.YmlDataControl;
 import java.io.File;
 import java.io.IOException;
@@ -140,7 +142,15 @@ public class CommandDl implements CommandExecutor {
                     
                     if(strings[0].equals("repair")){
                         YmlDataControl.repairOnlinePlayers();
+                        p.sendMessage(ChatColor.AQUA+"Repair Done :)");
                     }
+                    
+                    if(strings[0].equals("tools")){
+                        FilterAddTool.toolGive(p);
+                        FilterRemoveTool.toolGive(p);
+                        p.sendMessage(ChatColor.GREEN+"Free tools for u! :)");
+                    }
+                    
                     if(strings[0].equals("filter")){
                         if(strings[1].equals("add")){
                             ItemFilter.add(p);

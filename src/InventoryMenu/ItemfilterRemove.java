@@ -14,7 +14,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import me.Dremnor.DigLoot.Main;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -44,7 +46,7 @@ public class ItemfilterRemove implements Listener {
     @EventHandler
     public static void onInventoryClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
-  
+        
         if (event.getView().getTitle().equals("Remove")) {
             if(event.getSlot() == 35){
                 player.closeInventory();
@@ -69,6 +71,8 @@ public class ItemfilterRemove implements Listener {
                     setItem(item,i);
                 }
                 p.openInventory(itemfilterinventory);
+            }else{
+                p.sendMessage(ChatColor.DARK_RED+"Add some items to filter first");
             }
         }
     }
@@ -88,6 +92,30 @@ public class ItemfilterRemove implements Listener {
                         Logger.getLogger(LootInventory.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
+            }
+        }
+    }
+    
+    public static void removeItem(Player p, Block item) {
+        if(!PLUGIN.mysql){
+            File itemsFile = new File(PLUGIN.getDataFolder(),"itemfilter.yml");
+            if(itemsFile.exists()){
+                FileConfiguration items = YamlConfiguration.loadConfiguration(itemsFile);
+                List<String> itemlist = items.getStringList("filter.blocks");
+                if(itemlist.contains(item.getType().name())){
+                    itemlist.remove(item.getType().name());
+                    items.set("filter.blocks",itemlist);
+                    try {
+                        items.save(itemsFile);
+                        p.sendMessage(ChatColor.DARK_GREEN+"Item Removed! "+item.getType().name());
+                    } catch (IOException ex) {
+                        Logger.getLogger(LootInventory.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }else{
+                    p.sendMessage(ChatColor.DARK_RED+"This item is not in the list");
+                }
+            }else{
+                p.sendMessage(ChatColor.DARK_RED+"Add some items to filter first");
             }
         }
     }

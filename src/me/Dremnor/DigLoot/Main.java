@@ -8,7 +8,9 @@ package me.Dremnor.DigLoot;
 
 import Commands.CommandDl;
 import Events.BreakBlock;
+import Events.ItemDrop;
 import Events.NewPlayer;
+import Events.RightClick;
 import InventoryMenu.ItemfilterRemove;
 import InventoryMenu.LootInventory;
 import MysqlData.MysqlDataCon;
@@ -41,6 +43,8 @@ public class Main extends JavaPlugin implements Listener {
         
         //Check data storage option
         //this.mysql = this.getConfig().getBoolean("ues_mysql");
+        
+        //Filter options
         this.itemfilter = this.getConfig().getBoolean("itemfilter");
         this.is_filter_whitelist = this.getConfig().getBoolean("is_filter_whitelist");
         
@@ -59,6 +63,8 @@ public class Main extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new BreakBlock(), this);
         getServer().getPluginManager().registerEvents(new LootInventory(), this);
         getServer().getPluginManager().registerEvents(new ItemfilterRemove(), this);
+        getServer().getPluginManager().registerEvents(new RightClick(), this);
+        getServer().getPluginManager().registerEvents(new ItemDrop(), this);
         
         //Commands
         this.getCommand("dl").setExecutor(new CommandDl());
