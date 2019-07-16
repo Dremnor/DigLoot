@@ -5,6 +5,7 @@
 */
 package Events;
 
+import LootControll.ItemFilter;
 import YmlData.YmlDataControl;
 import java.io.File;
 import java.util.List;
@@ -27,11 +28,22 @@ public class BreakBlock implements Listener {
     
     @EventHandler
     public void onBreak(BlockBreakEvent event){
+        if(plugin.itemfilter){
+            if(ItemFilter.isRewardable(event.getBlock().getType().name())){
+                giveReward(event);
+            }else{
+                if(plugin.debug)event.getPlayer().sendMessage("Blok Zablokowany");
+            }
+        }else{
+            giveReward(event);
+        }
         
+    }
+    
+    private void giveReward(BlockBreakEvent event){
         Random rn = new Random();
         int los = rn.nextInt(plugin.chance);
         if(plugin.debug)event.getPlayer().sendMessage("Zniszczyles Blok los: "+Integer.toString(los));
-        
         if(los>=1 && los<=50){
             if(!plugin.mysql){
                 File itemsFile = new File(plugin.getDataFolder(),"loot.yml");
@@ -54,7 +66,5 @@ public class BreakBlock implements Listener {
             
             
         }
-        
-        
     }
 }

@@ -9,6 +9,7 @@ package me.Dremnor.DigLoot;
 import Commands.CommandDl;
 import Events.BreakBlock;
 import Events.NewPlayer;
+import InventoryMenu.ItemfilterRemove;
 import InventoryMenu.LootInventory;
 import MysqlData.MysqlDataCon;
 import java.sql.SQLException;
@@ -28,6 +29,9 @@ public class Main extends JavaPlugin implements Listener {
     public boolean debug = false;
     public int chance = 100;
     public boolean mysql = false;
+    public boolean itemfilter = false;
+    public boolean is_filter_whitelist = false;
+    
     
     @Override
     public void onEnable(){
@@ -36,7 +40,9 @@ public class Main extends JavaPlugin implements Listener {
         saveResource("config.yml", false);
         
         //Check data storage option
-        this.mysql = this.getConfig().getBoolean("ues_mysql");
+        //this.mysql = this.getConfig().getBoolean("ues_mysql");
+        this.itemfilter = this.getConfig().getBoolean("itemfilter");
+        this.is_filter_whitelist = this.getConfig().getBoolean("is_filter_whitelist");
         
         //Database Connection
         if(mysql){
@@ -52,6 +58,7 @@ public class Main extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new NewPlayer(), this);
         getServer().getPluginManager().registerEvents(new BreakBlock(), this);
         getServer().getPluginManager().registerEvents(new LootInventory(), this);
+        getServer().getPluginManager().registerEvents(new ItemfilterRemove(), this);
         
         //Commands
         this.getCommand("dl").setExecutor(new CommandDl());

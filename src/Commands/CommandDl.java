@@ -5,7 +5,9 @@
 */
 package Commands;
 
+import InventoryMenu.ItemfilterRemove;
 import InventoryMenu.LootInventory;
+import LootControll.ItemFilter;
 import YmlData.YmlDataControl;
 import java.io.File;
 import java.io.IOException;
@@ -139,7 +141,17 @@ public class CommandDl implements CommandExecutor {
                     if(strings[0].equals("repair")){
                         YmlDataControl.repairOnlinePlayers();
                     }
-                    
+                    if(strings[0].equals("filter")){
+                        if(strings[1].equals("add")){
+                            ItemFilter.add(p);
+                        }
+                        if(strings[1].equals("remove")){
+                            ItemfilterRemove.displayFilters(p);
+                        }
+                        if(strings[1].equals("list")){
+                            ItemFilter.add(p);
+                        }
+                    }
                 }else{
                     p.sendMessage("You don't have Permission to do that");
                 }

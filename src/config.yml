@@ -12,4 +12,15 @@ mysql:
     host: Host_Name
     port: Port
     table: Player_data_table_Name
-    
+
+# YOU CAN USE ALL BELOW THIS LANE ==========================================================================================================================================
+
+# Turn Item Filter on/of
+
+itemfilter: true
+
+# Shuld item filter act like whitelist or blacklist (Blacklist if fales)
+# WHITETLIST - Only items on whitelist will give loot after breaking
+# Blacklist - Items on blacklist will not give any loot
+
+is_filter_whitelist: false

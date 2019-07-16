@@ -44,11 +44,11 @@ public class LootInventory implements Listener{
     
     @EventHandler
     public static void onInventoryClick(InventoryClickEvent event) {
-        Player player = (Player) event.getWhoClicked(); // The player that clicked the item
-        ItemStack clicked = event.getCurrentItem(); // The item that was clicked
-        Inventory inventory = event.getInventory(); // The inventory that was clicked in
+        Player player = (Player) event.getWhoClicked();
+        ItemStack clicked = event.getCurrentItem();
+        Inventory inventory = event.getInventory();
         
-        if (inventory.getClass().getName().equals(loot.getClass().getName())) {
+        if (event.getView().getTitle().equals("Loot")) {
             if(event.getSlot() == 35){
                 player.closeInventory();
             }
