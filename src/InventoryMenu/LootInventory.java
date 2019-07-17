@@ -45,23 +45,25 @@ public class LootInventory implements Listener{
     @EventHandler
     public static void onInventoryClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
-        ItemStack clicked = event.getCurrentItem();
-        Inventory inventory = event.getInventory();
+        //ItemStack clicked = event.getCurrentItem();
+        //Inventory inventory = event.getInventory();
         
         if (event.getView().getTitle().equals("Loot")) {
-            if(event.getSlot() == 35){
-                player.closeInventory();
-            }
-            if(event.getSlot()>=0 && event.getSlot()<=26){
-                if(player.getInventory().firstEmpty()!=-1){
-                    getItem(player,event.getSlot());
-                    displayLoot(player);
-                }else{
-                    player.sendMessage(ChatColor.DARK_RED+"Inventory full :<");
+            if(event.getRawSlot() < event.getView().getTopInventory().getSize()){
+                if(PLUGIN.debug)System.out.println("Slot: "+event.getSlot()+" Title: "+event.getView().getTitle());
+                if(event.getSlot() == 35){
+                    player.closeInventory();
                 }
-                
+                if(event.getSlot()>=0 && event.getSlot()<=26){
+                    if(player.getInventory().firstEmpty()!=-1){
+                        getItem(player,event.getSlot());
+                        displayLoot(player);
+                    }else{
+                        player.sendMessage(ChatColor.DARK_RED+"Inventory full :<");
+                    }
+                    
+                }
             }
-            
             
             event.setCancelled(true);
             player.updateInventory();

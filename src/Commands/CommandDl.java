@@ -156,7 +156,7 @@ public class CommandDl implements CommandExecutor {
                             ItemFilter.add(p);
                         }
                         if(strings[1].equals("remove")){
-                            ItemfilterRemove.displayFilters(p);
+                            ItemfilterRemove.displayFilters(p,0);
                         }
                         if(strings[1].equals("list")){
                             ItemFilter.add(p);

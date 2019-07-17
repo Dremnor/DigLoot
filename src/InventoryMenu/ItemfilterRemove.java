@@ -6,9 +6,10 @@
 package InventoryMenu;
 
 
-import static InventoryMenu.LootInventory.loot;
+
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -48,33 +49,103 @@ public class ItemfilterRemove implements Listener {
         Player player = (Player) event.getWhoClicked();
         
         if (event.getView().getTitle().equals("Remove")) {
-            if(event.getSlot() == 35){
-                player.closeInventory();
-            }
-            if(event.getSlot()>=0 && event.getSlot()<=26){
-                removeItem(event.getSlot());
-                displayFilters(player);
+            if(event.getRawSlot() < event.getView().getTopInventory().getSize()){
+                if(PLUGIN.debug)System.out.println("Slot: "+event.getSlot()+" Title: "+event.getView().getTitle());
+                if(event.getSlot() == 35){
+                    player.closeInventory();
+                }
+                if(event.getSlot() == 32){
+                    ItemStack clicked = event.getCurrentItem();
+                    if(clicked!=null)
+                        if(clicked.getType().equals(Material.GREEN_STAINED_GLASS_PANE)){
+                            int page = getLoreInt(clicked,0);
+                            if(page!=-1){
+                                displayFilters(player,page);
+                            }
+                        }
+                }
+                if(event.getSlot() == 30){
+                    ItemStack clicked = event.getCurrentItem();
+                    if(clicked!=null)
+                        if(clicked.getType().equals(Material.RED_STAINED_GLASS_PANE)){
+                            int page = getLoreInt(clicked,0);
+                            if(page!=-1){
+                                displayFilters(player,page);
+                            }
+                        }
+                }
+                if(event.getSlot()>=0 && event.getSlot()<=26){
+                    removeItem(event.getSlot());
+                    displayFilters(player,0);
+                }
             }
             event.setCancelled(true);
+            
         }
     }
     
-    public static void displayFilters(Player p){
+    public static void displayFilters(Player p, int from){
         if(!PLUGIN.mysql){
             File itemsFile = new File(PLUGIN.getDataFolder(),"itemfilter.yml");
             if(itemsFile.exists()){
                 FileConfiguration items = YamlConfiguration.loadConfiguration(itemsFile);
                 List<String> itemlist = items.getStringList("filter.blocks");
                 clear();
-                for(int i=0;i<itemlist.size();i++){
+                int x=0;
+                for(int i=from;i<itemlist.size();i++){
                     ItemStack item = new ItemStack(Material.getMaterial(itemlist.get(i)));
-                    setItem(item,i);
+                    setItem(item,x);
+                    x++;
+                    if(x==27) break;
                 }
+                if(from==0){
+                    if(itemlist.size()>27){
+                        addNext("27");
+                    }
+                }else
+                    if(from!=0){
+                        if(from+27<itemlist.size()){
+                            addNext(Integer.toString(from+27));
+                        }
+                        if(from-27>=0){
+                            addBack(Integer.toString(from-27));
+                        }
+                    }
                 p.openInventory(itemfilterinventory);
             }else{
                 p.sendMessage(ChatColor.DARK_RED+"Add some items to filter first");
             }
         }
+    }
+    private static int getLoreInt(ItemStack item,int slot){
+        ItemMeta im = item.getItemMeta();
+        List<String> lo = im.getLore();
+        if(lo.size()>=slot){
+            return Integer.parseInt(lo.get(slot));
+        }
+        return -1;
+    }
+    
+    private static void addNext(String page){
+        ItemStack next = new ItemStack(Material.GREEN_STAINED_GLASS_PANE,1);
+        ItemMeta mt = next.getItemMeta();
+        List<String> lo = new ArrayList<>();
+        lo.add(page);
+        mt.setLore(lo);
+        mt.setDisplayName(ChatColor.GREEN+"Next Page");
+        next.setItemMeta(mt);
+        setItem(next,32);
+    }
+    
+    private static void addBack(String page){
+        ItemStack next = new ItemStack(Material.RED_STAINED_GLASS_PANE,1);
+        ItemMeta mt = next.getItemMeta();
+        List<String> lo = new ArrayList<>();
+        lo.add(page);
+        mt.setLore(lo);
+        mt.setDisplayName(ChatColor.RED+"Prev Page");
+        next.setItemMeta(mt);
+        setItem(next,30);
     }
     
     private static void removeItem(int slot) {
