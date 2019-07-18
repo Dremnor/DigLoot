@@ -5,6 +5,7 @@
 */
 package InventoryMenu;
 
+import Language.Locale;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -59,7 +60,7 @@ public class LootInventory implements Listener{
                         getItem(player,event.getSlot());
                         displayLoot(player);
                     }else{
-                        player.sendMessage(ChatColor.DARK_RED+"Inventory full :<");
+                        player.sendMessage(ChatColor.DARK_RED+Locale.inv_full);
                     }
                     
                 }
@@ -108,7 +109,7 @@ public class LootInventory implements Listener{
                         }
                     }else{
                         if(slot<=itemlist.size()-1)
-                            p.sendMessage(ChatColor.DARK_RED+"Inventory full :<");
+                            p.sendMessage(ChatColor.DARK_RED+Locale.inv_full);
                     }
             }
         }
@@ -118,7 +119,7 @@ public class LootInventory implements Listener{
         loot = Bukkit.createInventory(null, 36, "Loot");
         ItemStack exit = new ItemStack(Material.BARRIER, 1);
         ItemMeta itemMeta = exit.getItemMeta();
-        itemMeta.setDisplayName("Exit");
+        itemMeta.setDisplayName(Locale.exit);
         exit.setItemMeta(itemMeta);
         loot.setItem(35, exit);
     }

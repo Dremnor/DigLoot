@@ -7,6 +7,7 @@ package InventoryMenu;
 
 
 
+import Language.Locale;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -113,7 +114,7 @@ public class ItemfilterRemove implements Listener {
                     }
                 p.openInventory(itemfilterinventory);
             }else{
-                p.sendMessage(ChatColor.DARK_RED+"Add some items to filter first");
+                p.sendMessage(ChatColor.DARK_RED+Locale.you_need_to_add_some_items);
             }
         }
     }
@@ -132,7 +133,7 @@ public class ItemfilterRemove implements Listener {
         List<String> lo = new ArrayList<>();
         lo.add(page);
         mt.setLore(lo);
-        mt.setDisplayName(ChatColor.GREEN+"Next Page");
+        mt.setDisplayName(ChatColor.GREEN+Locale.next_page);
         next.setItemMeta(mt);
         setItem(next,32);
     }
@@ -143,7 +144,7 @@ public class ItemfilterRemove implements Listener {
         List<String> lo = new ArrayList<>();
         lo.add(page);
         mt.setLore(lo);
-        mt.setDisplayName(ChatColor.RED+"Prev Page");
+        mt.setDisplayName(ChatColor.RED+Locale.prev_page);
         next.setItemMeta(mt);
         setItem(next,30);
     }
@@ -183,10 +184,10 @@ public class ItemfilterRemove implements Listener {
                         Logger.getLogger(LootInventory.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }else{
-                    p.sendMessage(ChatColor.DARK_RED+"This item is not in the list");
+                    p.sendMessage(ChatColor.DARK_RED+Locale.not_on_the_list);
                 }
             }else{
-                p.sendMessage(ChatColor.DARK_RED+"Add some items to filter first");
+                p.sendMessage(ChatColor.DARK_RED+Locale.you_need_to_add_some_items);
             }
         }
     }
@@ -196,7 +197,7 @@ public class ItemfilterRemove implements Listener {
         itemfilterinventory = Bukkit.createInventory(null, 36, "Remove");
         ItemStack exit = new ItemStack(Material.BARRIER, 1);
         ItemMeta itemMeta = exit.getItemMeta();
-        itemMeta.setDisplayName("Exit");
+        itemMeta.setDisplayName(Locale.exit);
         exit.setItemMeta(itemMeta);
         itemfilterinventory.setItem(35, exit);
     }

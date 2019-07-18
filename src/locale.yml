@@ -1,0 +1,28 @@
+ENG:
+    created_by: DREMNOR
+    item_added_loot: Item added to loot table \0/
+    item_already_in_loot: Item already in loot table :o
+    you_need_to_hold_item_in_hand: You need to hold item in hand :(
+    wrong_cmd_param_rem: Wrong command parameters(/dl remove <item number from /dl list>) :(
+    wrong_cmd_rate: Wrong ussage Try "/dl rate <number>" like /dl rate 20
+    you_need_to_add_some_items: You need to add some items first :(
+    debug_enable: DigLoot Debug mode Enabled :>
+    debug_disable: DigLoot Debug mode Disabled :<
+    repair: Repair Done :)
+    tools: Free tools for u! :)
+    no_perms: You don't have Permission to do that
+    no_player: Wrong use! Player only cmd
+    got_loot: WoW! You got free loot! Check your loot inventory(/dl).
+    full_loot: Your loot inventory is Full! ;o.
+    item_drop: You Can't drop this item! Item Removed
+    tool_filter_add: Filter Add
+    tool_filter_remove: Filter Removed
+    next_page: Next Page
+    prev_page: Prev Page
+    not_on_the_list: This item is not in the list
+    inv_full: Inventory full :<
+    added_filter: Item added to filter table \0/ 
+    already_in_filter: Item already in filter table :o 
+    no_slot_for_tools: No free slot for tool :(
+    locale_reload: Local reloaded :)
+    exit: Exit

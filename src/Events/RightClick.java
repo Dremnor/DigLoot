@@ -6,6 +6,7 @@
 package Events;
 
 import InventoryMenu.ItemfilterRemove;
+import Language.Locale;
 import LootControll.ItemFilter;
 import java.util.List;
 import org.bukkit.ChatColor;
@@ -36,11 +37,11 @@ public class RightClick implements Listener{
                     List<String> lore = meta.getLore();
                     if(lore!=null)
                         if(lore.size()>0){
-                            if(lore.get(0).equals(ChatColor.GOLD+"Filter Add")){
+                            if(lore.get(0).equals(ChatColor.GOLD+Locale.tool_filter_add)){
                                 event.setCancelled(true);
                                 ItemFilter.add(p,event.getClickedBlock());
                             }
-                            if(lore.get(0).equals(ChatColor.GOLD+"Filter Remove")){
+                            if(lore.get(0).equals(ChatColor.GOLD+Locale.tool_filter_remove)){
                                 ItemfilterRemove.removeItem(p,event.getClickedBlock());
                                 event.setCancelled(true);
                             }

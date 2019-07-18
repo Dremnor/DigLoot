@@ -7,6 +7,7 @@ package Commands;
 
 import InventoryMenu.ItemfilterRemove;
 import InventoryMenu.LootInventory;
+import Language.Locale;
 import LootControll.ItemFilter;
 import Tools.FilterAddTool;
 import Tools.FilterRemoveTool;
@@ -72,13 +73,13 @@ public class CommandDl implements CommandExecutor {
                                 } catch (IOException ex) {
                                     Logger.getLogger(CommandDl.class.getName()).log(Level.SEVERE, null, ex);
                                 }
-                                p.sendMessage(ChatColor.DARK_GREEN+"Item added to loot table \\0/");
+                                p.sendMessage(ChatColor.DARK_GREEN+Locale.item_added_loot);
                             }else{
-                                p.sendMessage(ChatColor.DARK_RED+"Item already in loot table :o");
+                                p.sendMessage(ChatColor.DARK_RED+Locale.item_already_in_loot);
                             }
                             
                         }else{
-                            p.sendMessage(ChatColor.DARK_RED+"You need to hold item in hand :(");
+                            p.sendMessage(ChatColor.DARK_RED+Locale.you_need_to_hold_item_in_hand);
                         }
                     }
                     
@@ -99,16 +100,16 @@ public class CommandDl implements CommandExecutor {
                                             Logger.getLogger(CommandDl.class.getName()).log(Level.SEVERE, null, ex);
                                         }
                                     }else{
-                                        p.sendMessage(ChatColor.DARK_RED+"Wrong command parameters(/dl remove <item number from /dl list>) :(");
+                                        p.sendMessage(ChatColor.DARK_RED+Locale.wrong_cmd_param_rem);
                                     }
                                 }else{
-                                    p.sendMessage(ChatColor.DARK_RED+"Wrong command parameters(/dl remove <item number from /dl list>) :(");
+                                    p.sendMessage(ChatColor.DARK_RED+Locale.wrong_cmd_param_rem);
                                 }
                             }else{
-                                p.sendMessage(ChatColor.DARK_RED+"Wrong command parameters(/dl remove <item number from /dl list>) :(");
+                                p.sendMessage(ChatColor.DARK_RED+Locale.wrong_cmd_param_rem);
                             }
                         }else{
-                            p.sendMessage(ChatColor.DARK_RED+"You need to add some items first :(");
+                            p.sendMessage(ChatColor.DARK_RED+Locale.wrong_cmd_param_rem);
                         }
                     }
                     
@@ -128,27 +129,38 @@ public class CommandDl implements CommandExecutor {
                     if(strings[0].equals("debug")){
                         plugin.debug = !plugin.debug;
                         if(!plugin.debug){
-                            p.sendMessage(ChatColor.DARK_RED+"DigLoot Debug mode Disabled :<");
+                            p.sendMessage(ChatColor.DARK_RED+Locale.debug_disable);
                         }else{
-                            p.sendMessage(ChatColor.DARK_GREEN+"DigLoot Debug mode Enabled :>");
+                            p.sendMessage(ChatColor.DARK_GREEN+Locale.debug_enable);
                         }
                     }
                     
                     if(strings[0].equals("rate")){
-                        if(tryParseInt(strings[1])){
-                            plugin.chance = Integer.parseInt(strings[1]);
+                        if(strings.length==2){
+                            if(tryParseInt(strings[1])){
+                                plugin.chance = Integer.parseInt(strings[1]);
+                                p.sendMessage(ChatColor.DARK_GREEN+"Rate changed to "+plugin.chance);
+                            }
+                        }else{
+                            p.sendMessage(ChatColor.DARK_RED+Locale.wrong_cmd_rate);
                         }
+                        
                     }
                     
                     if(strings[0].equals("repair")){
                         YmlDataControl.repairOnlinePlayers();
-                        p.sendMessage(ChatColor.AQUA+"Repair Done :)");
+                        p.sendMessage(ChatColor.AQUA+Locale.repair);
                     }
                     
                     if(strings[0].equals("tools")){
                         FilterAddTool.toolGive(p);
                         FilterRemoveTool.toolGive(p);
-                        p.sendMessage(ChatColor.GREEN+"Free tools for u! :)");
+                        p.sendMessage(ChatColor.GREEN+Locale.tools);
+                    }
+                    
+                    if(strings[0].equals("locale")){
+                        Locale.reloadLocale(plugin.getConfig().getString("language"));
+                        p.sendMessage(ChatColor.GREEN+Locale.locale_reload);
                     }
                     
                     if(strings[0].equals("filter")){
@@ -163,14 +175,14 @@ public class CommandDl implements CommandExecutor {
                         }
                     }
                 }else{
-                    p.sendMessage("You don't have Permission to do that");
+                    p.sendMessage(ChatColor.LIGHT_PURPLE+Locale.no_perms);
                 }
             }else{
                 
                 LootInventory.displayLoot(p);
             }
         }else{
-            cs.sendMessage("Wrong use! Player only cmd");
+            cs.sendMessage(Locale.no_player);
         }
         
         

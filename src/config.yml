@@ -24,3 +24,10 @@ itemfilter: true
 # Blacklist - Items on blacklist will not give any loot
 
 is_filter_whitelist: false
+
+# LOCALE
+# Avaiable: ENG,PL
+# You can mace translation in locale.yml. If you want post it on https://dev.bukkit.org/projects/digloot 
+# then i can check it and add too plugin
+
+language: ENG

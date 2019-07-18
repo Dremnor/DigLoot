@@ -13,7 +13,9 @@ import Events.NewPlayer;
 import Events.RightClick;
 import InventoryMenu.ItemfilterRemove;
 import InventoryMenu.LootInventory;
+import Language.Locale;
 import MysqlData.MysqlDataCon;
+import java.io.File;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,14 +41,25 @@ public class Main extends JavaPlugin implements Listener {
     public void onEnable(){
         
         //load config
+        File check = new File(getDataFolder(),"config.yml");
+        if(!check.exists())
         saveResource("config.yml", false);
+        
+        check = new File(getDataFolder(),"locale.yml");
+        if(!check.exists())
+        saveResource("locale.yml", false);
         
         //Check data storage option
         //this.mysql = this.getConfig().getBoolean("ues_mysql");
         
+        
+        
         //Filter options
         this.itemfilter = this.getConfig().getBoolean("itemfilter");
         this.is_filter_whitelist = this.getConfig().getBoolean("is_filter_whitelist");
+        
+        //load locale
+        Locale.reloadLocale(this.getConfig().getString("language"));
         
         //Database Connection
         if(mysql){
@@ -71,7 +84,14 @@ public class Main extends JavaPlugin implements Listener {
         
         
         
-        getServer().getConsoleSender().sendMessage(ChatColor.DARK_PURPLE+"DigLoot Enabled");
+        getServer().getConsoleSender().sendMessage(ChatColor.DARK_PURPLE+"@@@@@@@@@@@@@@@@@@@");
+        getServer().getConsoleSender().sendMessage(ChatColor.DARK_PURPLE+"@                 @");
+        getServer().getConsoleSender().sendMessage(ChatColor.DARK_PURPLE+"@ DigLoot Enabled @");
+        getServer().getConsoleSender().sendMessage(ChatColor.DARK_PURPLE+"@ DigLoot Enabled @");
+        getServer().getConsoleSender().sendMessage(ChatColor.DARK_PURPLE+"@                 @");
+        getServer().getConsoleSender().sendMessage(ChatColor.DARK_PURPLE+"@@@@@@@@@@@@@@@@@@@");
+        getServer().getConsoleSender().sendMessage(ChatColor.DARK_BLUE+"DigLoot used translation author: "+Locale.created_by);
+        
     }
     
     @Override

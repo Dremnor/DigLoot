@@ -5,6 +5,7 @@
 */
 package Events;
 
+import Language.Locale;
 import java.util.List;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -26,9 +27,9 @@ public class ItemDrop implements Listener{
         List<String> lore = ItemMeta.getLore();
         if(lore!=null)
             if(lore.size()>0){
-                if(lore.get(0).equals(ChatColor.GOLD+"Filter Add") || lore.get(0).equals(ChatColor.GOLD+"Filter Remove")){
+                if(lore.get(0).equals(ChatColor.GOLD+Locale.tool_filter_remove) || lore.get(0).equals(ChatColor.GOLD+Locale.tool_filter_add)){
                     event.getItemDrop().remove();
-                    p.sendMessage(ChatColor.DARK_RED+"You Can't drop this item! Item Removed");
+                    p.sendMessage(ChatColor.DARK_RED+Locale.item_drop);
                 }
             }
     }

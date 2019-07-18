@@ -6,6 +6,7 @@
 package LootControll;
 
 import Commands.CommandDl;
+import Language.Locale;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -80,9 +81,9 @@ public class ItemFilter {
             } catch (IOException ex) {
                 Logger.getLogger(CommandDl.class.getName()).log(Level.SEVERE, null, ex);
             }
-            p.sendMessage(ChatColor.DARK_GREEN+"Item added to filter table \\0/ "+item.getType().name());
+            p.sendMessage(ChatColor.DARK_GREEN+Locale.added_filter+item.getType().name());
         }else{
-            p.sendMessage(ChatColor.DARK_RED+"Item already in filter table :o "+item.getType().name());
+            p.sendMessage(ChatColor.DARK_RED+Locale.already_in_filter+item.getType().name());
         }
         
     }

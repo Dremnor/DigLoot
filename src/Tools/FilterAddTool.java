@@ -6,6 +6,7 @@
 package Tools;
 
 import static InventoryMenu.ItemfilterRemove.itemfilterinventory;
+import Language.Locale;
 import java.util.ArrayList;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -22,9 +23,9 @@ public class FilterAddTool {
     
     static {
         ItemMeta itemMeta = addtool.getItemMeta();
-        itemMeta.setDisplayName("Filter Add");
+        itemMeta.setDisplayName(Locale.tool_filter_add);
         ArrayList<String> lore = new ArrayList<String>();
-        lore.add(ChatColor.GOLD+"Filter Add");
+        lore.add(ChatColor.GOLD+Locale.tool_filter_add);
         lore.add("=========");
         lore.add(ChatColor.GOLD+"Right click item to add it to Filter");
         itemMeta.setLore(lore);
@@ -35,7 +36,7 @@ public class FilterAddTool {
         if(p.getInventory().firstEmpty()!=-1){
             p.getInventory().addItem(addtool);
         }else{
-            p.sendMessage(ChatColor.DARK_RED+"No free slot for tool :(");
+            p.sendMessage(ChatColor.DARK_RED+Locale.no_slot_for_tools);
         }
     }
 }

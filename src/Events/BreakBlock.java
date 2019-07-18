@@ -5,6 +5,7 @@
 */
 package Events;
 
+import Language.Locale;
 import LootControll.ItemFilter;
 import YmlData.YmlDataControl;
 import java.io.File;
@@ -54,9 +55,9 @@ public class BreakBlock implements Listener {
                         los = rn.nextInt(itemlist.size());
                         //event.getPlayer().getInventory().addItem(ItemStack.deserialize((Map<String, Object>) itemlist.get(los)));
                         if(YmlDataControl.addItem(event.getPlayer().getUniqueId(), (Map<String, Object>) itemlist.get(los))){
-                            event.getPlayer().sendMessage(ChatColor.GOLD+"WoW! You got free loot! Check your loot inventory(/dl).");
+                            event.getPlayer().sendMessage(ChatColor.GOLD+Locale.got_loot);
                         }else{
-                            event.getPlayer().sendMessage(ChatColor.RED+"Your loot inventory is Full! ;o.");
+                            event.getPlayer().sendMessage(ChatColor.RED+Locale.full_loot);
                         }
                         
                         
